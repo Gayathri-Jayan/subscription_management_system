@@ -441,3 +441,33 @@
     padding: 10px;
   }
 }
+/* Brightloop – Products pastel theme */
+
+.products-page {
+  color: #303b36;
+}
+
+.products-page .panel,
+.products-page .product-card {
+  background: #fffefa;
+  border-color: #e9e9e1;
+  border-radius: 13px;
+}
+
+.products-page input,
+.products-page select,
+.products-page textarea {
+  border-color: #e5e6de;
+  border-radius: 8px;
+}
+
+.products-page input:focus,
+.products-page select:focus,
+.products-page textarea:focus {
+  outline: 2px solid #dce8de;
+  border-color: #a7bea9;
+}
+
+.products-page button {
+  border-radius: 8px;
+}

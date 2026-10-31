@@ -24,13 +24,13 @@ button {
 .app {
   min-height: 100vh;
   display: flex;
-  background: #f7f9fc;
+  background: #f7f6f1;
 }
 
 .sidebar {
   width: 248px;
-  background: #fff;
-  border-right: 1px solid #e9edf3;
+  background: #fbfaf6;
+  border-right: 1px solid #e9e9e1;
   padding: 27px 17px 18px;
   display: flex;
   flex-direction: column;
@@ -48,8 +48,8 @@ button {
   width: 39px;
   height: 39px;
   border-radius: 11px;
-  background: #2866dc;
-  color: white;
+  background: #dce8de;
+  color: #526b59;
   display: grid;
   place-items: center;
   font-size: 23px;
@@ -70,7 +70,7 @@ button {
 
 .workspace {
   padding: 13px 11px;
-  border: 1px solid #e9edf3;
+  border: 1px solid #e9e9e1;
   border-radius: 8px;
   font-size: 11px;
   display: flex;
@@ -82,7 +82,7 @@ button {
 .workspace-dot {
   width: 9px;
   height: 9px;
-  background: #36b47c;
+  background: #f7f6f1;
   border-radius: 50%;
 }
 
@@ -119,10 +119,14 @@ button {
   width: 100%;
 }
 
-.nav-item:hover,
+.nav-item:hover {
+  background: #edf3ed;
+  color: #526b59;
+}
+
 .nav-item.active {
-  background: #edf3ff;
-  color: #2866dc;
+  background: #dcd8ec;
+  color: #625b83;
   font-weight: 600;
 }
 
@@ -182,6 +186,7 @@ button {
 .main-content {
   flex: 1;
   min-width: 0;
+  background: #f7f6f1;
 }
 
 .topbar {
@@ -267,7 +272,7 @@ button {
 }
 
 .primary-button {
-  background: #2866dc;
+  background: #718b78;
   border: none;
   border-radius: 7px;
   padding: 12px 17px;
@@ -277,7 +282,7 @@ button {
 }
 
 .primary-button:hover {
-  background: #1955c3;
+  background: #5d7664;
 }
 
 .stats-grid {
@@ -288,9 +293,9 @@ button {
 }
 
 .stat-card, .panel {
-  background: white;
-  border: 1px solid #e9edf3;
-  border-radius: 10px;
+  background: #fffefa;
+  border: 1px solid #e9e9e1;
+  border-radius: 13px;
 }
 
 .stat-card {
@@ -301,13 +306,28 @@ button {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: #edf3ff;
-  color: #2866dc;
+  background: #dce8de;
+  color: #526b59;
   display: grid;
   place-items: center;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 15px;
+}
+
+.stats-grid .stat-card:nth-child(2) .stat-icon {
+  background: #dcd8ec;
+  color: #625b83;
+}
+
+.stats-grid .stat-card:nth-child(3) .stat-icon {
+  background: #eee7dc;
+  color: #8c7759;
+}
+
+.stats-grid .stat-card:nth-child(4) .stat-icon {
+  background: #f2e4df;
+  color: #ad7969;
 }
 
 .warning-icon {
@@ -417,13 +437,13 @@ button {
   width: 65%;
   max-width: 30px;
   border-radius: 5px 5px 0 0;
-  background: #b8cef9;
+  background: #c5d8c8;
 }
 
 .chart-column:nth-child(4) .chart-bar,
 .chart-column:nth-child(8) .chart-bar,
 .chart-column:nth-child(12) .chart-bar {
-  background: #2866dc;
+  background: #a99fc8;
 }
 
 .chart-labels {
@@ -444,7 +464,11 @@ button {
   width: 145px;
   height: 145px;
   border-radius: 50%;
-  background: conic-gradient(#2866dc 0% 66.7%, #efb44e 66.7% 86%, #e7ebf2 86% 100%);
+background: conic-gradient(
+  #a7bea9 0% 66.7%,
+  #b9afd5 66.7% 86%,
+  #e9e7df 86% 100%
+);
   display: grid;
   place-items: center;
 }
@@ -706,4 +730,96 @@ td {
   .footer {
     flex-direction: column;
   }
+}
+
+/* Brightloop pastel primary buttons */
+.primary-button,
+.add-button,
+.submit-button,
+.save-button,
+.btn-primary {
+  background: #718b78;
+  color: #ffffff;
+  border-color: #718b78;
+  border-radius: 9px;
+  transition: all 0.2s ease;
+}
+
+.primary-button:hover,
+.add-button:hover,
+.submit-button:hover,
+.save-button:hover,
+.btn-primary:hover {
+  background: #5d7664;
+  border-color: #5d7664;
+}
+
+/* GLOBAL BRIGHTLOOP PASTEL BUTTON THEME */
+
+/* Primary action buttons across all pages */
+button[class*="primary"],
+button[class*="add"],
+button[class*="submit"],
+button[class*="save"],
+button[class*="create"],
+button[class*="new"],
+.primary-button {
+  background-color: #718b78;
+  color: #ffffff;
+  border-color: #718b78;
+  border-radius: 9px;
+}
+
+/* Hover effect */
+button[class*="primary"]:hover,
+button[class*="add"]:hover,
+button[class*="submit"]:hover,
+button[class*="save"]:hover,
+button[class*="create"]:hover,
+button[class*="new"]:hover,
+.primary-button:hover {
+  background-color: #5d7664;
+  border-color: #5d7664;
+}
+
+/* Secondary buttons */
+button[class*="secondary"],
+button[class*="cancel"],
+button[class*="filter"] {
+  background-color: #f0eef7;
+  color: #625b83;
+  border-color: #dcd8ec;
+}
+
+/* Links and action buttons */
+button[class*="edit"] {
+  color: #718b78;
+}
+
+button[class*="delete"] {
+  color: #b17e6b;
+}
+/* Global Brightloop action button colours */
+
+main .page-heading button,
+main .page-header button,
+main button[class*="primary"],
+main button[class*="add"],
+main button[class*="export"],
+main button[class*="create"],
+main button[class*="submit"],
+main button[class*="save"] {
+  background: #718b78 !important;
+  color: #ffffff !important;
+  border-color: #718b78 !important;
+  border-radius: 9px;
+}
+
+main .page-heading button:hover,
+main .page-header button:hover,
+main button[class*="primary"]:hover,
+main button[class*="add"]:hover,
+main button[class*="export"]:hover {
+  background: #5d7664 !important;
+  border-color: #5d7664 !important;
 }

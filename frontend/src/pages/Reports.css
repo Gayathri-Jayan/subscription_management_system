@@ -261,19 +261,19 @@
 }
 
 .active-dot {
-  background: #36b77a;
+  background: #a7bea9;
 }
 
 .draft-dot {
-  background: #5a7fe8;
+  background: #b9afd5;
 }
 
 .closed-dot {
-  background: #f08b75;
+  background: #e1dfd7;
 }
 
 .pending-dot {
-  background: #e7b64e;
+  background: #c5d8c8;
 }
 
 .subscription-total {
@@ -440,4 +440,18 @@
   .top-plan-revenue {
     text-align: left;
   }
+}
+
+/* Pastel chart colours */
+.chart-bar,
+.revenue-bar,
+.bar-fill,
+.progress-fill {
+  background-color: #a7bea9;
+}
+
+/* Highlighted chart elements */
+.chart-bar:nth-child(even),
+.revenue-bar:nth-child(even) {
+  background-color: #b9afd5;
 }
