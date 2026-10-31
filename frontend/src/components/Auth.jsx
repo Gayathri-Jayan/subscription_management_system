@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import './Auth.css';
 
+const API_URL = 'http://127.0.0.1:8000';
+
 export default function Auth({ onLogin }) {
   const [isRegister, setIsRegister] = useState(false);
   const [form, setForm] = useState({
@@ -9,11 +11,59 @@ export default function Auth({ onLogin }) {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // UI only for now. Backend authentication will be connected later.
-    onLogin?.(form);
+    setError('');
+    setLoading(true);
+
+    try {
+      let response;
+
+      if (isRegister) {
+        response = await fetch(`${API_URL}/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form)
+        });
+      } else {
+        const body = new URLSearchParams();
+        body.append('username', form.email);
+        body.append('password', form.password);
+
+        response = await fetch(`${API_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body
+        });
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || data.message || 'Request failed');
+      }
+
+      if (isRegister) {
+        setIsRegister(false);
+        setForm({ name: '', email: form.email, password: '' });
+        setError('Registration successful. Please sign in.');
+        return;
+      }
+
+      localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      onLogin?.(data.user);
+    } catch (err) {
+      setError(err.message || 'Unable to connect to the server');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,9 +91,8 @@ export default function Auth({ onLogin }) {
               Full name
               <input
                 required
-                placeholder="Enter your name"
                 value={form.name}
-                onChange={e => setForm({...form, name: e.target.value})}
+                onChange={e => setForm({ ...form, name: e.target.value })}
               />
             </label>
           )}
@@ -53,9 +102,8 @@ export default function Auth({ onLogin }) {
             <input
               required
               type="email"
-              placeholder="you@example.com"
               value={form.email}
-              onChange={e => setForm({...form, email: e.target.value})}
+              onChange={e => setForm({ ...form, email: e.target.value })}
             />
           </label>
 
@@ -64,20 +112,27 @@ export default function Auth({ onLogin }) {
             <input
               required
               type="password"
-              placeholder="Enter your password"
               value={form.password}
-              onChange={e => setForm({...form, password: e.target.value})}
+              onChange={e => setForm({ ...form, password: e.target.value })}
             />
           </label>
 
-          <button type="submit" className="auth-submit">
-            {isRegister ? 'Create Account' : 'Sign In'}
+          {error && <p role="alert">{error}</p>}
+
+          <button type="submit" className="auth-submit" disabled={loading}>
+            {loading ? 'Please wait...' : isRegister ? 'Create Account' : 'Sign In'}
           </button>
         </form>
 
         <p className="auth-switch">
           {isRegister ? 'Already have an account?' : "Don't have an account?"}
-          <button onClick={() => setIsRegister(!isRegister)}>
+          <button
+            type="button"
+            onClick={() => {
+              setIsRegister(!isRegister);
+              setError('');
+            }}
+          >
             {isRegister ? 'Sign in' : 'Create account'}
           </button>
         </p>

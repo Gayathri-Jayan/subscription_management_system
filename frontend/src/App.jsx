@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './App.css';
 
+import Auth from './components/Auth';
 import Products from './pages/Products';
 import Plans from './pages/Plans';
 import Subscriptions from './pages/Subscriptions';
@@ -31,7 +32,6 @@ const menuItems = [
   { name: 'Reports', icon: '▥' },
 ];
 
-// Connect sidebar names to their respective page components
 const pageComponents = {
   Products,
   Plans,
@@ -44,6 +44,19 @@ const pageComponents = {
 };
 
 function App() {
+  const [user, setUser] = useState(() => {
+    try {
+      const token = localStorage.getItem('access_token');
+      const savedUser = localStorage.getItem('user');
+
+      return token && savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('user');
+      return null;
+    }
+  });
+
   const [activePage, setActivePage] = useState('Overview');
   const [search, setSearch] = useState('');
 
@@ -53,8 +66,24 @@ function App() {
       .includes(search.toLowerCase())
   );
 
-  // Display the selected page component
   const PageComponent = pageComponents[activePage];
+
+  const handleLogin = (loggedInUser) => {
+    setUser(loggedInUser);
+    setActivePage('Overview');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
+    setUser(null);
+    setActivePage('Overview');
+  };
+
+  // Show login screen when the user is not authenticated.
+  if (!user) {
+    return <Auth onLogin={handleLogin} />;
+  }
 
   return (
     <div className="app">
@@ -102,13 +131,27 @@ function App() {
           </button>
 
           <div className="user-profile">
-            <div className="avatar">AD</div>
-            <div>
-              <strong>Admin User</strong>
-              <span>Administrator</span>
+            <div className="avatar">
+              {(user.name || 'U').substring(0, 2).toUpperCase()}
             </div>
-            <span className="profile-more">···</span>
+            <div>
+              <strong>{user.name}</strong>
+              <span>{user.role}</span>
+            </div>
+            <button
+              className="profile-more"
+              onClick={handleLogout}
+              title="Logout"
+              aria-label="Logout"
+            >
+              ↪
+            </button>
           </div>
+
+          <button className="nav-item" onClick={handleLogout}>
+            <span className="nav-icon">⇥</span>
+            Logout
+          </button>
         </div>
       </aside>
 
@@ -126,22 +169,21 @@ function App() {
               ♧
             </button>
             <button className="help-button">Help & Support</button>
-            <div className="top-avatar">AD</div>
+            <div className="top-avatar">
+              {(user.name || 'U').substring(0, 2).toUpperCase()}
+            </div>
           </div>
         </header>
 
         {/* PAGE CONTENT */}
-
         {activePage !== 'Overview' && PageComponent ? (
 
-          // Render the selected module
           <section className="page-content">
             <PageComponent />
           </section>
 
         ) : (
 
-          // ORIGINAL OVERVIEW DASHBOARD
           <section className="page-content">
 
             {/* DASHBOARD HEADING */}
@@ -149,7 +191,7 @@ function App() {
               <div>
                 <p className="eyebrow">SATURDAY, OCTOBER 31, 2026</p>
 
-                <h1>Good morning, Admin 👋</h1>
+                <h1>Good morning, {user.name} 👋</h1>
 
                 <p className="subtitle">
                   Here's what's happening with your subscriptions today.
@@ -304,7 +346,7 @@ function App() {
                 />
 
                 <button className="filter-button">
-                  ☷ Filters
+                  ⚷ Filters
                 </button>
               </div>
 
@@ -328,13 +370,11 @@ function App() {
                         <td className="customer-name">{item.customer}</td>
                         <td>{item.plan}</td>
                         <td className="amount">{item.amount}</td>
-
                         <td>
                           <span className={`status ${item.status.toLowerCase()}`}>
                             {item.status}
                           </span>
                         </td>
-
                         <td>{item.date}</td>
                       </tr>
                     ))}
