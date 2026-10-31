@@ -1,7 +1,15 @@
 
-import { useState } from 'react'
-import Products from './pages/Products'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+
+import Products from './pages/Products';
+import Plans from './pages/Plans';
+import Subscriptions from './pages/Subscriptions';
+import Quotations from './pages/Quotations';
+import Invoices from './pages/Invoices';
+import Payments from './pages/Payments';
+import Discounts from './pages/Discounts';
+import Reports from './pages/Reports';
 
 const subscriptions = [
   { id: 'SUB-1001', customer: 'Acme Technologies', plan: 'Enterprise', amount: '₹12,000', status: 'Active', date: '31 Oct 2026' },
@@ -9,7 +17,7 @@ const subscriptions = [
   { id: 'SUB-1003', customer: 'Nova Solutions', plan: 'Basic', amount: '₹2,500', status: 'Pending', date: '29 Oct 2026' },
   { id: 'SUB-1004', customer: 'Cloudify Labs', plan: 'Enterprise', amount: '₹12,000', status: 'Active', date: '28 Oct 2026' },
   { id: 'SUB-1005', customer: 'Bright Digital', plan: 'Professional', amount: '₹6,000', status: 'Cancelled', date: '27 Oct 2026' },
-]
+];
 
 const menuItems = [
   { name: 'Overview', icon: '◫' },
@@ -21,17 +29,32 @@ const menuItems = [
   { name: 'Payments', icon: '⇄' },
   { name: 'Discounts', icon: '%' },
   { name: 'Reports', icon: '▥' },
-]
+];
+
+// Connect sidebar names to their respective page components
+const pageComponents = {
+  Products,
+  Plans,
+  Subscriptions,
+  Quotations,
+  Invoices,
+  Payments,
+  Discounts,
+  Reports,
+};
 
 function App() {
-  const [activePage, setActivePage] = useState('Overview')
-  const [search, setSearch] = useState('')
+  const [activePage, setActivePage] = useState('Overview');
+  const [search, setSearch] = useState('');
 
   const filteredSubscriptions = subscriptions.filter((item) =>
     `${item.customer} ${item.id} ${item.plan}`
       .toLowerCase()
       .includes(search.toLowerCase())
-  )
+  );
+
+  // Display the selected page component
+  const PageComponent = pageComponents[activePage];
 
   return (
     <div className="app">
@@ -63,6 +86,7 @@ function App() {
             >
               <span className="nav-icon">{item.icon}</span>
               {item.name}
+
               {item.name === 'Invoices' && (
                 <span className="nav-count">4</span>
               )}
@@ -72,6 +96,7 @@ function App() {
 
         <div className="sidebar-bottom">
           <p className="menu-label">PREFERENCES</p>
+
           <button className="nav-item">
             <span className="nav-icon">⚙</span> Settings
           </button>
@@ -97,32 +122,35 @@ function App() {
           </div>
 
           <div className="top-actions">
-            <button className="icon-button" aria-label="Notifications">♧</button>
+            <button className="icon-button" aria-label="Notifications">
+              ♧
+            </button>
             <button className="help-button">Help & Support</button>
             <div className="top-avatar">AD</div>
           </div>
         </header>
 
         {/* PAGE CONTENT */}
-        {activePage === 'Products' ? (
 
+        {activePage !== 'Overview' && PageComponent ? (
+
+          // Render the selected module
           <section className="page-content">
-            <Products />
+            <PageComponent />
           </section>
 
         ) : (
 
+          // ORIGINAL OVERVIEW DASHBOARD
           <section className="page-content">
 
             {/* DASHBOARD HEADING */}
             <div className="page-heading">
               <div>
                 <p className="eyebrow">SATURDAY, OCTOBER 31, 2026</p>
-                <h1>
-                  {activePage === 'Overview'
-                    ? 'Good morning, Admin 👋'
-                    : activePage}
-                </h1>
+
+                <h1>Good morning, Admin 👋</h1>
+
                 <p className="subtitle">
                   Here's what's happening with your subscriptions today.
                 </p>
@@ -178,7 +206,10 @@ function App() {
                     <p>Monitor your recurring revenue performance</p>
                   </div>
 
-                  <select aria-label="Revenue period" className="period-select">
+                  <select
+                    aria-label="Revenue period"
+                    className="period-select"
+                  >
                     <option>Last 7 months</option>
                     <option>Last 30 days</option>
                     <option>This year</option>
@@ -233,10 +264,12 @@ function App() {
                     <span className="legend-dot active-dot"></span>
                     Active <strong>856</strong>
                   </div>
+
                   <div>
                     <span className="legend-dot pending-dot"></span>
                     Pending <strong>248</strong>
                   </div>
+
                   <div>
                     <span className="legend-dot cancelled-dot"></span>
                     Cancelled <strong>180</strong>
@@ -270,7 +303,9 @@ function App() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
 
-                <button className="filter-button">☷ Filters</button>
+                <button className="filter-button">
+                  ☷ Filters
+                </button>
               </div>
 
               <div className="table-scroll">
@@ -293,11 +328,13 @@ function App() {
                         <td className="customer-name">{item.customer}</td>
                         <td>{item.plan}</td>
                         <td className="amount">{item.amount}</td>
+
                         <td>
                           <span className={`status ${item.status.toLowerCase()}`}>
                             {item.status}
                           </span>
                         </td>
+
                         <td>{item.date}</td>
                       </tr>
                     ))}
@@ -325,7 +362,7 @@ function App() {
 
       </main>
     </div>
-  )
+  );
 }
 
 function StatCard({ title, value, change, icon, warning }) {
@@ -334,14 +371,16 @@ function StatCard({ title, value, change, icon, warning }) {
       <div className={`stat-icon ${warning ? 'warning-icon' : ''}`}>
         {icon}
       </div>
+
       <p>{title}</p>
       <h2>{value}</h2>
+
       <span className={warning ? 'warning-text' : 'growth-text'}>
         {warning ? '● ' : '↗ '}
         {change}
       </span>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

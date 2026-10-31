@@ -1,0 +1,325 @@
+.discounts-page {
+  padding: 30px;
+  color: #202938;
+}
+
+.discounts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.discounts-header h1 {
+  font-size: 26px;
+  margin: 0 0 7px;
+}
+
+.discounts-header p {
+  color: #8993a3;
+  margin: 0;
+  font-size: 14px;
+}
+
+.discount-add-btn,
+.discount-save-btn {
+  background: #3867e8;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.discount-add-btn:hover,
+.discount-save-btn:hover {
+  background: #2854cf;
+}
+
+.discount-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.discount-stat-card {
+  background: white;
+  border: 1px solid #edf0f4;
+  border-radius: 10px;
+  padding: 21px;
+}
+
+.discount-stat-card span {
+  color: #8993a3;
+  font-size: 13px;
+}
+
+.discount-stat-card h2 {
+  font-size: 27px;
+  margin: 12px 0 0;
+}
+
+.discount-toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.discount-toolbar input,
+.discount-toolbar select {
+  border: 1px solid #e2e6ed;
+  background: white;
+  border-radius: 7px;
+  padding: 12px 14px;
+  font-size: 13px;
+  outline: none;
+}
+
+.discount-toolbar input {
+  flex: 1;
+}
+
+.discount-toolbar input:focus,
+.discount-toolbar select:focus,
+.discount-form-grid input:focus,
+.discount-form-grid select:focus {
+  border-color: #3867e8;
+}
+
+.discount-table-container {
+  background: white;
+  border: 1px solid #edf0f4;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.discount-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.discount-table th {
+  background: #f8f9fb;
+  color: #8791a0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px;
+  font-weight: 600;
+}
+
+.discount-table td {
+  padding: 17px 16px;
+  border-top: 1px solid #f0f2f5;
+  font-size: 13px;
+  color: #566174;
+}
+
+.discount-name {
+  font-weight: 600;
+  color: #263246 !important;
+}
+
+.discount-code {
+  background: #eef3ff;
+  color: #3867e8;
+  padding: 6px 9px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.discount-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.discount-dates span {
+  color: #9aa2ae;
+  font-size: 11px;
+}
+
+.discount-status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.discount-status.active {
+  background: #e6f7ed;
+  color: #239653;
+}
+
+.discount-status.inactive {
+  background: #f0f1f4;
+  color: #737d8c;
+}
+
+.discount-status.expired {
+  background: #fff0ed;
+  color: #d65a49;
+}
+
+.discount-actions {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.discount-actions button {
+  border: none;
+  background: transparent;
+  color: #3867e8;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.discount-actions .discount-delete {
+  color: #dc5555;
+}
+
+.discount-empty {
+  text-align: center;
+  padding: 35px !important;
+  color: #8993a3 !important;
+}
+
+.discount-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 29, 45, 0.48);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.discount-modal {
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 26px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.discount-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.discount-modal-header h2 {
+  font-size: 21px;
+  margin: 0 0 7px;
+}
+
+.discount-modal-header p {
+  color: #8993a3;
+  font-size: 13px;
+  margin: 0;
+}
+
+.discount-close {
+  border: none;
+  background: transparent;
+  font-size: 27px;
+  color: #8791a0;
+  cursor: pointer;
+}
+
+.discount-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.discount-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #566174;
+}
+
+.discount-form-grid input,
+.discount-form-grid select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #e2e6ed;
+  border-radius: 6px;
+  outline: none;
+  font-size: 13px;
+  color: #263246;
+  background: white;
+}
+
+.discount-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.discount-cancel-btn {
+  background: white;
+  border: 1px solid #e2e6ed;
+  color: #566174;
+  padding: 11px 17px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .discount-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .discounts-page {
+    padding: 18px;
+  }
+
+  .discounts-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .discount-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .discount-stat-card {
+    padding: 15px;
+  }
+
+  .discount-toolbar {
+    flex-direction: column;
+  }
+
+  .discount-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discount-modal {
+    padding: 20px;
+  }
+}
