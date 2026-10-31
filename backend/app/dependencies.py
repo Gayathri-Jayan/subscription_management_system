@@ -8,7 +8,11 @@ from sqlalchemy.orm import Session
 from .database import get_db
 from .models import User
 
-load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+# Load environment variables from backend/.env
+env_path = Path(__file__).resolve().parents[1] / ".env"
+load_dotenv(dotenv_path=env_path)
+
+# Read JWT secret securely from environment
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY or len(SECRET_KEY) < 32:
     raise RuntimeError("Set SECRET_KEY to a random value of at least 32 characters in backend/.env")
