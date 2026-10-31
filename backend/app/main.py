@@ -10,6 +10,9 @@ from .products import router as products_router
 from .plans import router as plans_router
 from .subscriptions import router as subscriptions_router
 
+from . import billing_models
+from .billing import router as billing_router
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -32,6 +35,7 @@ app.include_router(auth_router)
 app.include_router(products_router)
 app.include_router(plans_router)
 app.include_router(subscriptions_router)
+app.include_router(billing_router)
 
 
 @app.get("/")
