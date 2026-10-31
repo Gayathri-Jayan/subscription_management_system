@@ -1,31 +1,16 @@
-# Frontend – Subscription Management System
+# React + Vite
 
-## Overview
-This module is responsible for developing the user interface of the Subscription Management System using React.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Technology Stack
-- React.js
-- JavaScript
-- HTML5
-- CSS3
-- Vite
+Currently, two official plugins are available:
 
-## Frontend Modules
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-1. Login and Registration
-2. Admin Dashboard
-3. Sidebar and Navigation
-4. Product Management
-5. Subscription Plans
-6. Subscription Management
-7. Quotations
-8. Customer Portal
+## React Compiler
 
-## Responsibilities
-- Develop reusable React components.
-- Create responsive and user-friendly interfaces.
-- Integrate frontend pages with backend APIs.
-- Implement role-based navigation for Admin, Staff and Customers.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Development Status
-Frontend development initialized.
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
